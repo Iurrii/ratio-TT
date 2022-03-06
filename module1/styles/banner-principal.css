@@ -1,0 +1,29 @@
+.banner-principal {
+  
+}
+
+.banner-principal__content {
+
+}
+
+.banner-principal__title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 110%;
+  color: #212353;
+}
+
+.banner-principal__text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  color: #4B5D68;
+}
+
+.banner-principal__btn {
+  text-decoration: none;
+}
+
+.banner-principal__image-container {}
