@@ -1,17 +1,26 @@
-.banner-principal {
-  
+.banner-principal {}
+
+.banner-principal__body {
+  display: flex;
+  flex-direction: column;
+  height: 565px;
+
 }
 
 .banner-principal__content {
-
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5vh;
 }
 
 .banner-principal__title {
   font-style: normal;
   font-weight: 700;
-  font-size: 45px;
+  /* font-size: 45px; */
+  font-size: calc(45px + (25 + 25 * 0.7) * ((100vw - 320px) / 1600));
   line-height: 110%;
   color: #212353;
+  margin-bottom: 4vh;
 }
 
 .banner-principal__text {
@@ -20,10 +29,106 @@
   font-size: 16px;
   line-height: 160%;
   color: #4B5D68;
+  margin-bottom: 4vh;
 }
 
 .banner-principal__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  height: 60px;
+  margin: auto;
   text-decoration: none;
+  color: #fff;
+  background-color: #9C69E2;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 160%;
 }
 
-.banner-principal__image-container {}
+.banner-principal__image-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 768px) {
+  .banner-principal__content {
+    margin-bottom: 10vh;
+  }
+
+  .banner-principal__title {
+    margin-bottom: 3vh;
+  }
+
+  .banner-principal__content {}
+
+  .banner-principal__text {
+    /* margin-bottom: 10vh; */
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .banner-principal__body {
+    flex-direction: row;
+  }
+
+  .banner-principal__content {
+    flex-shrink: 4;
+    margin-bottom: 0;
+  }
+
+  .banner-principal__title {
+    /* position: absolute; */
+    min-width: 200%;
+    max-width: 50vh;
+    height: 30%;
+    margin: 0 0 5vh;
+  }
+
+  .banner-principal__text {
+    /* margin-top: 30%; */
+    min-width: 120%;
+    margin-bottom: 30%;
+  }
+
+  .banner-principal__btn {
+    margin: 0 0;
+  }
+
+  .banner-principal__image-container {
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 2;
+    min-width: 600px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .banner-principal__body {}
+
+  .banner-principal__content {
+    margin-bottom: 0;
+  }
+
+  .banner-principal__title {
+    width: 200%;
+    height: fit-content;
+    margin: 0 0 2vh;
+  }
+
+  .banner-principal__text {
+    width: 150%;
+    margin-top: 80%;
+    margin-bottom: 5vh;
+  }
+
+  .banner-principal__btn {
+    margin: 0 0;
+  }
+
+  .banner-principal__image-container {}
+}
