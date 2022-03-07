@@ -1,0 +1,13 @@
+.footer {
+  min-height: 400px;
+}
+
+.footer>hr {
+  height: 2px;
+  background: #9C69E2;
+  opacity: 0.2;
+}
+
+.footer-container {
+  min-height: 400px;
+}

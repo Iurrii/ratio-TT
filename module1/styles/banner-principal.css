@@ -1,22 +1,25 @@
-.banner-principal {}
+.banner-principal {
+  margin-bottom: 60px;
+}
 
 .banner-principal__body {
   display: flex;
   flex-direction: column;
-  height: 565px;
+  min-height: 565px;
+
 
 }
 
 .banner-principal__content {
   display: flex;
   flex-direction: column;
-  margin-bottom: 5vh;
+  margin-bottom: 8vh;
 }
 
 .banner-principal__title {
   font-style: normal;
   font-weight: 700;
-  /* font-size: 45px; */
+  /* font-size: 45px; для 1600px*/
   font-size: calc(45px + (25 + 25 * 0.7) * ((100vw - 320px) / 1600));
   line-height: 110%;
   color: #212353;
@@ -108,6 +111,10 @@
 }
 
 @media screen and (min-width: 1200px) {
+  .banner-principal {
+    margin-bottom: 90px;
+  }
+
   .banner-principal__body {}
 
   .banner-principal__content {
@@ -117,13 +124,13 @@
   .banner-principal__title {
     width: 200%;
     height: fit-content;
-    margin: 0 0 2vh;
+    margin: 0 0 40px;
   }
 
   .banner-principal__text {
     width: 150%;
-    margin-top: 80%;
-    margin-bottom: 5vh;
+    margin-bottom: 150px;
+    font-size: 18px;
   }
 
   .banner-principal__btn {
