@@ -87,7 +87,6 @@
   .banner-principal__title {
     /* position: absolute; */
     min-width: 200%;
-    max-width: 50vh;
     height: 30%;
     margin: 0 0 5vh;
   }
@@ -122,13 +121,16 @@
   }
 
   .banner-principal__title {
-    width: 200%;
+    /* width: 100%; */
+    min-width: 120%;
+    max-width: 120%;
     height: fit-content;
     margin: 0 0 40px;
   }
 
   .banner-principal__text {
-    width: 150%;
+    min-width: 0px;
+    width: 70%;
     margin-bottom: 150px;
     font-size: 18px;
   }

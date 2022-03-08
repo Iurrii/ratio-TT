@@ -25,9 +25,20 @@
   height: auto;
 }
 
+hr {
+  display: block;
+  height: 2px;
+  background: #9C69E2;
+  opacity: 0.2;
+}
+
+/* div {
+  border: 1px solid brown;
+} */
+
 body {
   font-family: 'Ubuntu', sans-serif;
-  background-color: #fff;
+  background: linear-gradient(180deg, #F6FAFD 0%, #FFFFFF 19.4%);
 }
 
 .container {
@@ -36,7 +47,7 @@ body {
   height: 100%;
   margin: auto;
 
-  border: 1px solid #4B5D68;
+  /* border: 1px solid #4B5D68; */
 }
 
 @media screen and (min-width: 1200px) {
@@ -98,6 +109,10 @@ body {
 }
 
 @media screen and (min-width: 992px) {
+  .header {
+    margin-top: 20px;
+  }
+
   .header__menu {
     gap: 60px
   }
