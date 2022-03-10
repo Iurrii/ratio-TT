@@ -1,5 +1,3 @@
-.features {}
-
 .features__body {
   margin-bottom: 20vh;
 }
@@ -14,7 +12,6 @@
 .features__title {
   font-style: normal;
   font-weight: 700;
-  /* font-size: 40px; для 1600px */
   font-size: calc(30px + (10 + 10 * 0.7) * ((100vw - 320px) / 1600));
   line-height: 130%;
   color: #212353;
@@ -28,7 +25,6 @@
   font-size: 18px;
   text-align: center;
   line-height: 120%;
-  /* line-height: 160%; для 1600px*/
   color: #4B5D68;
 }
 
@@ -72,7 +68,6 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  /* line-height: 160%; 1600*/
   line-height: 120%;
   color: #4B5D68;
 }
@@ -181,6 +176,10 @@
 }
 
 @media screen and (min-width:1600px) {
+  .features__body {
+    margin-bottom: 150px;
+  }
+
   .features__header {
     margin-bottom: 100px;
   }
