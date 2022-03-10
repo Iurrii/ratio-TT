@@ -1,3 +1,19 @@
+.bg-70 {
+  background-image: url('../images/backgrounds/bg-70.svg');
+}
+
+.bg-71 {
+  background-image: url('../images/backgrounds/bg-71.svg');
+}
+
+.bg-72 {
+  background-image: url('../images/backgrounds/bg-72.svg');
+}
+
+.bg-73 {
+  background-image: url('../images/backgrounds/bg-73.svg');
+}
+
 .features__body {
   margin-bottom: 20vh;
 }
@@ -38,8 +54,9 @@
   max-width: 530px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #4B5D68;
-  ;
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: auto 100%;
 }
 
 .features-item__image-container {
