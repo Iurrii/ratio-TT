@@ -19,7 +19,9 @@
 @import url("./testimonials");
 @import url("./footer.css");
 
-
+div, article {
+  border: 1px solid brown;
+}
 
 * {
   box-sizing: border-box;

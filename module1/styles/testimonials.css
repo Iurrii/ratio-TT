@@ -124,10 +124,18 @@
   height: 14px;
 }
 
+.testimonials__back:hover {
+  cursor: pointer;
+}
+
 .testimonials__forward {
   display: block;
   width: 20px;
   height: 14px;
+}
+
+.testimonials__forward:hover {
+  cursor: pointer;
 }
 
 @media screen and (min-width:576px) {

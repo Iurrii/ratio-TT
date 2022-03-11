@@ -42,6 +42,8 @@
 
   .description__image-container {
     flex-shrink: 1;
+    max-width: 469px;
+    max-height: 496px;
   }
 
   .description__content {
@@ -59,19 +61,22 @@
   }
 
   .description__body {
-    padding: 3% 4%;
+    padding: 2% 3%;
   }
 
   .description__image-container {
-    width: 469px;
-    height: 496px;
-    flex-shrink: 0;
+    width: 40%;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
   }
 
   .description__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 60%;
+    flex: 1 1 auto;
   }
 
   .description__text {

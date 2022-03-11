@@ -1,7 +1,10 @@
 # ratio-TT
+/**/
+макет:
+https://www.figma.com/file/VsA7lowyHmr0WUZAQ9X3n8/Ratio-courses?node-id=413%3A3
+/**/
 у Убунту нет font-w 800 и 900, как предусматривает макет <br>
 mobile-first
-/*у Убунту нет font-w 800 и 900, как предусматривает макет*/
 /**/
 /*mobile-first*/
 /**/
