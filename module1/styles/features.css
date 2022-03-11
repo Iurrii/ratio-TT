@@ -59,8 +59,16 @@
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
-
+    margin: auto;
+    transition: all 0.2s;
   }
+
+  .features-item:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
 
   .features-item__image-container {
     max-width: 230px;
@@ -111,6 +119,11 @@
     line-height: 160%;
     letter-spacing: 0.005em;
     color: #212353;
+  }
+
+  .features-item__link:hover {
+    cursor: pointer;
+    color: #7c53b6;
   }
 
   .features-item__icon {

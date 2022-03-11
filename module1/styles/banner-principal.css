@@ -47,6 +47,16 @@
   font-weight: 800;
   font-style: normal;
   line-height: 160%;
+  transition: all 0.2s;
+}
+
+.banner-principal__btn:hover {
+  background-color: #7c53b6;
+}
+
+.banner-principal__btn:active {
+  background-color: #fff;
+  color:#9C69E2;
 }
 
 .banner-principal__image-container {
@@ -108,14 +118,14 @@
 
   .banner-principal__title {
     min-width: 120%;
-    max-width: 120%;
+    width: 300%;
     height: fit-content;
     margin: 0 0 40px;
   }
 
   .banner-principal__text {
     min-width: 0px;
-    width: 70%;
+    width: 300%;
     margin-bottom: 150px;
     font-size: 18px;
   }
@@ -153,7 +163,7 @@
   .banner-principal__title {
     min-width: 120%;
     max-width: none;
-    width: 200%;
+    width: 150%;
     margin: 0;
   }
 

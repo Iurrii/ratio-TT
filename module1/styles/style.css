@@ -19,10 +19,6 @@
 @import url("./testimonials");
 @import url("./footer.css");
 
-div, article {
-  border: 1px solid brown;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -98,6 +94,11 @@ body {
   font-size: 16px;
   line-height: 160%;
   color: #4B5D68;
+  transition: all 0.2s;
+}
+
+.header__link:hover {
+  color: #9c69e2;
 }
 
 @media screen and (min-width: 768px) {

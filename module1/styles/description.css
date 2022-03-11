@@ -34,6 +34,12 @@
   color: #4B5D68;
 }
 
+@media screen and (min-width:768px) {
+  .description__text{
+    line-height: 140%;
+  }
+}
+
 @media screen and (min-width: 992px) {
   .description__body {
     flex-direction: row;
@@ -61,7 +67,7 @@
   }
 
   .description__body {
-    padding: 2% 3%;
+    padding: 5% 4%;
   }
 
   .description__image-container {
