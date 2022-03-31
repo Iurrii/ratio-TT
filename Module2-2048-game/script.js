@@ -12,19 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function createBoard() {
     for (let i = 0; i < widthBoard * widthBoard; i++) {
       let sell = document.createElement("div");
-      sell.classList.add("grid-element");
-      sell.innerHTML = 0;
+      sell.classList.add("grid__element");
+      // sell.innerHTML = '';
       gridDisplay.appendChild(sell);
       sells.push(sell);
     }
     generate();
     generate();
-    colorModule(sells);
+    dinamicsStylesCell(sells);
   }
 
   function generate() {
     let randomNumber = Math.floor(Math.random() * sells.length);
     if (sells[randomNumber].innerHTML == 0) {
+      console.log(sells);
       sells[randomNumber].innerHTML = 2;
     } else generate();
   }
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let filteredRow = row.filter((num) => num);
 
         let missing = 5 - filteredRow.length;
-        let zeros = Array(missing).fill(0);
+        let zeros = Array(missing).fill(null);
 
         let newRow = zeros.concat(filteredRow);
 
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let filteredRow = row.filter((num) => num);
 
         let missing = 5 - filteredRow.length;
-        let zeros = Array(missing).fill(0);
+        let zeros = Array(missing).fill(null);
 
         let newRow = filteredRow.concat(zeros);
 
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
       let filteredColumn = column.filter((num) => num);
       let missing = 5 - filteredColumn.length;
-      let zeros = Array(missing).fill(0);
+      let zeros = Array(missing).fill(null);
       let newColumn = zeros.concat(filteredColumn);
       sells[i].innerHTML = newColumn[0];
       sells[i + widthBoard].innerHTML = newColumn[1];
@@ -135,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
       let filteredColumn = column.filter((num) => num);
       let missing = 5 - filteredColumn.length;
-      let zeros = Array(missing).fill(0);
+      let zeros = Array(missing).fill(null);
       let newColumn = filteredColumn.concat(zeros);
       sells[i].innerHTML = newColumn[0];
       sells[i + widthBoard].innerHTML = newColumn[1];
@@ -151,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let combinedTotal =
           parseInt(sells[i].innerHTML) + parseInt(sells[i + 1].innerHTML);
         sells[i].innerHTML = combinedTotal;
-        sells[i + 1].innerHTML = 0;
+        sells[i + 1].innerHTML = "";
       }
     }
   }
@@ -167,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
           parseInt(sells[i].innerHTML) +
           parseInt(sells[i + widthBoard].innerHTML);
         sells[i].innerHTML = combinedTotal;
-        sells[i + widthBoard].innerHTML = 0;
+        sells[i + widthBoard].innerHTML = "";
       }
     }
   }
@@ -189,31 +190,31 @@ document.addEventListener("DOMContentLoaded", () => {
     combineRow();
     moveToRight();
     generate();
-    colorModule(sells);
+    dinamicsStylesCell(sells);
   }
   function directionToLeft() {
     moveToLeft();
     combineRow();
     moveToLeft();
     generate();
-    colorModule(sells);
+    dinamicsStylesCell(sells);
   }
   function directionToUp() {
     moveToUp();
     combineColumn();
     moveToUp();
     generate();
-    colorModule(sells);
+    dinamicsStylesCell(sells);
   }
   function directionToDown() {
     moveToDown();
     combineColumn();
     moveToDown();
     generate();
-    colorModule(sells);
+    dinamicsStylesCell(sells);
   }
 
-  function colorModule(arr) {
+  function dinamicsStylesCell(arr) {
     arr.forEach((item) => {
       item.classList.remove(
         "color-shadow-2",

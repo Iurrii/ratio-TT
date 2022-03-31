@@ -7,6 +7,39 @@
   font-family: 'Iceland', cursive;
 }
 
+body {
+  background-color: black;
+  padding-top: 10vh;
+}
+
+.game-section {}
+
+.game-container {
+  width: 96vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score {
+  width: 50vw;
+  max-width: 300px;
+  margin-bottom: 40px;
+  color: #fff;
+  text-shadow:
+    0 0 1px #009999,
+    0 0 2px #009999,
+    0 0 5px #009999,
+    0 0 11px #009999,
+    0 0 20px #009999;
+
+  &__title {
+    text-transform: uppercase;
+  }
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -17,29 +50,17 @@
   margin: 0 auto;
   padding: 5px;
 
-  &-element {
+  &__element {
     width: 58px;
     height: 58px;
     background-color: #071204;
     margin: 5px;
-    font-size: 40px;
+    font-size: 45px;
     display: flex;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
     color: #fff;
-    // text-shadow:
-    //   0 0 1px #fff,
-    //   0 0 2px #fff,
-    //   0 0 5px #fff,
-    //   0 0 11px #fff,
-    //   0 0 20px #fff;
-    // text-shadow:
-    //   0 0 1px #FF7D73,
-    //   0 0 2px #FF7D73,
-    //   0 0 5px #FF7D73,
-    //   0 0 11px #FF1300,
-    //   0 0 20px #FF1300;
   }
 }
 
@@ -62,6 +83,7 @@
 }
 
 .color-shadow-8 {
+
   text-shadow:
     0 0 1px #9fee00,
     0 0 2px #9fee00,
@@ -98,6 +120,7 @@
 }
 
 .color-shadow-128 {
+  font-size: 35px;
   text-shadow:
     0 0 1px #ff7400,
     0 0 2px #ff7400,
@@ -107,10 +130,41 @@
 }
 
 .color-shadow-256 {
+  font-size: 35px;
   text-shadow:
     0 0 1px #ff0000,
     0 0 2px #ff0000,
     0 0 5px #ff0000,
     0 0 11px #ff0000,
     0 0 20px #ff0000;
+}
+
+.color-shadow-512 {
+  font-size: 35px;
+  text-shadow:
+    0 0 1px #cd0074,
+    0 0 2px #cd0074,
+    0 0 5px #cd0074,
+    0 0 11px #cd0074,
+    0 0 20px #cd0074;
+}
+
+.color-shadow-1024 {
+  font-size: 25px;
+  text-shadow:
+    0 0 1px #7209ab,
+    0 0 2px #7209ab,
+    0 0 5px #7209ab,
+    0 0 11px #7209ab,
+    0 0 20px #7209ab;
+}
+
+.color-shadow-2048 {
+  font-size: 25px;
+  text-shadow:
+    0 0 1px #3914b0,
+    0 0 2px #3914b0,
+    0 0 5px #3914b0,
+    0 0 11px #3914b0,
+    0 0 20px #3914b0;
 }
