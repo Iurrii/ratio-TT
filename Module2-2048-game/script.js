@@ -5,39 +5,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoreDisplay = document.getElementById("score");
   const resultDisplay = document.getElementById("result");
   const widthBoard = 5;
-  let sells = [];
+  let cells = [];
+  let score = 0;
 
   createBoard();
 
   function createBoard() {
     for (let i = 0; i < widthBoard * widthBoard; i++) {
-      let sell = document.createElement("div");
-      sell.classList.add("grid__element");
-      // sell.innerHTML = '';
-      gridDisplay.appendChild(sell);
-      sells.push(sell);
+      let cell = document.createElement("div");
+      cell.classList.add("grid__element");
+      gridDisplay.appendChild(cell);
+      cells.push(cell);
     }
     generate();
     generate();
-    dinamicsStylesCell(sells);
+    dynamicsStylesCell(cells);
   }
 
   function generate() {
-    let randomNumber = Math.floor(Math.random() * sells.length);
-    if (sells[randomNumber].innerHTML == 0) {
-      console.log(sells);
-      sells[randomNumber].innerHTML = 2;
+    let randomNumber = Math.floor(Math.random() * cells.length);
+    if (cells[randomNumber].innerHTML == "") {
+      cells[randomNumber].innerHTML = 2;
+      checkForGameOver(cells);
     } else generate();
   }
 
   function moveToRight() {
     for (let i = 0; i < widthBoard * widthBoard; i++) {
       if (i % 5 === 0) {
-        let totalOne = sells[i].innerHTML;
-        let totalTwo = sells[i + 1].innerHTML;
-        let totalThree = sells[i + 2].innerHTML;
-        let totalFour = sells[i + 3].innerHTML;
-        let totalFive = sells[i + 4].innerHTML;
+        let totalOne = cells[i].innerHTML;
+        let totalTwo = cells[i + 1].innerHTML;
+        let totalThree = cells[i + 2].innerHTML;
+        let totalFour = cells[i + 3].innerHTML;
+        let totalFive = cells[i + 4].innerHTML;
         let row = [
           parseInt(totalOne),
           parseInt(totalTwo),
@@ -53,11 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let newRow = zeros.concat(filteredRow);
 
-        sells[i].innerHTML = newRow[0];
-        sells[i + 1].innerHTML = newRow[1];
-        sells[i + 2].innerHTML = newRow[2];
-        sells[i + 3].innerHTML = newRow[3];
-        sells[i + 4].innerHTML = newRow[4];
+        cells[i].innerHTML = newRow[0];
+        cells[i + 1].innerHTML = newRow[1];
+        cells[i + 2].innerHTML = newRow[2];
+        cells[i + 3].innerHTML = newRow[3];
+        cells[i + 4].innerHTML = newRow[4];
       }
     }
   }
@@ -65,11 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function moveToLeft() {
     for (let i = 0; i < widthBoard * widthBoard; i++) {
       if (i % 5 === 0) {
-        let totalOne = sells[i].innerHTML;
-        let totalTwo = sells[i + 1].innerHTML;
-        let totalThree = sells[i + 2].innerHTML;
-        let totalFour = sells[i + 3].innerHTML;
-        let totalFive = sells[i + 4].innerHTML;
+        let totalOne = cells[i].innerHTML;
+        let totalTwo = cells[i + 1].innerHTML;
+        let totalThree = cells[i + 2].innerHTML;
+        let totalFour = cells[i + 3].innerHTML;
+        let totalFive = cells[i + 4].innerHTML;
         let row = [
           parseInt(totalOne),
           parseInt(totalTwo),
@@ -85,22 +85,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let newRow = filteredRow.concat(zeros);
 
-        sells[i].innerHTML = newRow[0];
-        sells[i + 1].innerHTML = newRow[1];
-        sells[i + 2].innerHTML = newRow[2];
-        sells[i + 3].innerHTML = newRow[3];
-        sells[i + 4].innerHTML = newRow[4];
+        cells[i].innerHTML = newRow[0];
+        cells[i + 1].innerHTML = newRow[1];
+        cells[i + 2].innerHTML = newRow[2];
+        cells[i + 3].innerHTML = newRow[3];
+        cells[i + 4].innerHTML = newRow[4];
       }
     }
   }
 
   function moveToDown() {
     for (let i = 0; i < widthBoard; i++) {
-      let totalOne = sells[i].innerHTML;
-      let totalTwo = sells[i + widthBoard].innerHTML;
-      let totalThree = sells[i + widthBoard * 2].innerHTML;
-      let totalFour = sells[i + widthBoard * 3].innerHTML;
-      let totalFive = sells[i + widthBoard * 4].innerHTML;
+      let totalOne = cells[i].innerHTML;
+      let totalTwo = cells[i + widthBoard].innerHTML;
+      let totalThree = cells[i + widthBoard * 2].innerHTML;
+      let totalFour = cells[i + widthBoard * 3].innerHTML;
+      let totalFive = cells[i + widthBoard * 4].innerHTML;
       let column = [
         parseInt(totalOne),
         parseInt(totalTwo),
@@ -112,21 +112,21 @@ document.addEventListener("DOMContentLoaded", () => {
       let missing = 5 - filteredColumn.length;
       let zeros = Array(missing).fill(null);
       let newColumn = zeros.concat(filteredColumn);
-      sells[i].innerHTML = newColumn[0];
-      sells[i + widthBoard].innerHTML = newColumn[1];
-      sells[i + widthBoard * 2].innerHTML = newColumn[2];
-      sells[i + widthBoard * 3].innerHTML = newColumn[3];
-      sells[i + widthBoard * 4].innerHTML = newColumn[4];
+      cells[i].innerHTML = newColumn[0];
+      cells[i + widthBoard].innerHTML = newColumn[1];
+      cells[i + widthBoard * 2].innerHTML = newColumn[2];
+      cells[i + widthBoard * 3].innerHTML = newColumn[3];
+      cells[i + widthBoard * 4].innerHTML = newColumn[4];
     }
   }
 
   function moveToUp() {
     for (let i = 0; i < widthBoard; i++) {
-      let totalOne = sells[i].innerHTML;
-      let totalTwo = sells[i + widthBoard].innerHTML;
-      let totalThree = sells[i + widthBoard * 2].innerHTML;
-      let totalFour = sells[i + widthBoard * 3].innerHTML;
-      let totalFive = sells[i + widthBoard * 4].innerHTML;
+      let totalOne = cells[i].innerHTML;
+      let totalTwo = cells[i + widthBoard].innerHTML;
+      let totalThree = cells[i + widthBoard * 2].innerHTML;
+      let totalFour = cells[i + widthBoard * 3].innerHTML;
+      let totalFive = cells[i + widthBoard * 4].innerHTML;
       let column = [
         parseInt(totalOne),
         parseInt(totalTwo),
@@ -138,23 +138,28 @@ document.addEventListener("DOMContentLoaded", () => {
       let missing = 5 - filteredColumn.length;
       let zeros = Array(missing).fill(null);
       let newColumn = filteredColumn.concat(zeros);
-      sells[i].innerHTML = newColumn[0];
-      sells[i + widthBoard].innerHTML = newColumn[1];
-      sells[i + widthBoard * 2].innerHTML = newColumn[2];
-      sells[i + widthBoard * 3].innerHTML = newColumn[3];
-      sells[i + widthBoard * 4].innerHTML = newColumn[4];
+      cells[i].innerHTML = newColumn[0];
+      cells[i + widthBoard].innerHTML = newColumn[1];
+      cells[i + widthBoard * 2].innerHTML = newColumn[2];
+      cells[i + widthBoard * 3].innerHTML = newColumn[3];
+      cells[i + widthBoard * 4].innerHTML = newColumn[4];
     }
   }
 
   function combineRow() {
     for (let i = 0; i < widthBoard * widthBoard; i++) {
-      if (i % 5 !== 4 && sells[i].innerHTML === sells[i + 1].innerHTML) {
+      if (i % 5 !== 4 && cells[i].innerHTML === cells[i + 1].innerHTML) {
         let combinedTotal =
-          parseInt(sells[i].innerHTML) + parseInt(sells[i + 1].innerHTML);
-        sells[i].innerHTML = combinedTotal;
-        sells[i + 1].innerHTML = "";
+          parseInt(cells[i].innerHTML) + parseInt(cells[i + 1].innerHTML);
+        cells[i].innerHTML = combinedTotal;
+        cells[i + 1].innerHTML = "";
+        if (!Number.isNaN(combinedTotal)) {
+          score += combinedTotal;
+          scoreDisplay.innerHTML = score;
+        }
       }
     }
+    checkForWin(cells);
   }
 
   function combineColumn() {
@@ -162,15 +167,21 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         //если раскомментировать не складывает вертикально
         // i % 5 !== 4 &&
-        sells[i].innerHTML === sells[i + widthBoard].innerHTML
+        cells[i].innerHTML === cells[i + widthBoard].innerHTML
       ) {
         let combinedTotal =
-          parseInt(sells[i].innerHTML) +
-          parseInt(sells[i + widthBoard].innerHTML);
-        sells[i].innerHTML = combinedTotal;
-        sells[i + widthBoard].innerHTML = "";
+          parseInt(cells[i].innerHTML) +
+          parseInt(cells[i + widthBoard].innerHTML);
+        cells[i].innerHTML = combinedTotal;
+        cells[i + widthBoard].innerHTML = "";
+
+        if (!Number.isNaN(combinedTotal)) {
+          score += combinedTotal;
+          scoreDisplay.innerHTML = score;
+        }
       }
     }
+    checkForWin(cells);
   }
 
   function control(e) {
@@ -183,86 +194,105 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (e.code == "ArrowLeft") {
       directionToLeft();
     }
+    generate();
+    dynamicsStylesCell(cells);
   }
 
   function directionToRight() {
     moveToRight();
     combineRow();
     moveToRight();
-    generate();
-    dinamicsStylesCell(sells);
   }
+
   function directionToLeft() {
     moveToLeft();
     combineRow();
     moveToLeft();
-    generate();
-    dinamicsStylesCell(sells);
   }
+
   function directionToUp() {
     moveToUp();
     combineColumn();
     moveToUp();
-    generate();
-    dinamicsStylesCell(sells);
   }
+
   function directionToDown() {
     moveToDown();
     combineColumn();
     moveToDown();
-    generate();
-    dinamicsStylesCell(sells);
   }
 
-  function dinamicsStylesCell(arr) {
+  function dynamicsStylesCell(arr) {
     arr.forEach((item) => {
       item.classList.remove(
-        "color-shadow-2",
-        "color-shadow-4",
-        "color-shadow-8",
-        "color-shadow-16",
-        "color-shadow-32",
-        "color-shadow-64",
-        "color-shadow-128",
-        "color-shadow-256",
-        "color-shadow-512",
-        "color-shadow-1024",
-        "color-shadow-2054"
+        "dynamic-style-2",
+        "dynamic-style-4",
+        "dynamic-style-8",
+        "dynamic-style-16",
+        "dynamic-style-32",
+        "dynamic-style-64",
+        "dynamic-style-128",
+        "dynamic-style-256",
+        "dynamic-style-512",
+        "dynamic-style-1024",
+        "dynamic-style-2054"
       );
 
       if (item.innerHTML == "2") {
-        item.classList.add("color-shadow-2");
+        item.classList.add("dynamic-style-2");
       }
       if (item.innerHTML == "4") {
-        item.classList.add("color-shadow-4");
+        item.classList.add("dynamic-style-4");
       }
       if (item.innerHTML == "8") {
-        item.classList.add("color-shadow-8");
+        item.classList.add("dynamic-style-8");
       }
       if (item.innerHTML == "16") {
-        item.classList.add("color-shadow-16");
+        item.classList.add("dynamic-style-16");
       }
       if (item.innerHTML == "32") {
-        item.classList.add("color-shadow-32");
+        item.classList.add("dynamic-style-32");
       }
       if (item.innerHTML == "64") {
-        item.classList.add("color-shadow-64");
+        item.classList.add("dynamic-style-64");
       }
       if (item.innerHTML == "128") {
-        item.classList.add("color-shadow-128");
+        item.classList.add("dynamic-style-128");
       }
       if (item.innerHTML == "256") {
-        item.classList.add("color-shadow-256");
+        item.classList.add("dynamic-style-256");
       }
       if (item.innerHTML == "512") {
-        item.classList.add("color-shadow-512");
+        item.classList.add("dynamic-style-512");
       }
       if (item.innerHTML == "1024") {
-        item.classList.add("color-shadow-1024");
+        item.classList.add("dynamic-style-1024");
       }
       if (item.innerHTML == "2048") {
-        item.classList.add("color-shadow-2048");
+        item.classList.add("dynamic-style-2048");
       }
     });
+  }
+
+  function checkForWin(arr) {
+    arr.forEach((item) => {
+      if (item.innerHTML == 2048) {
+        document.removeEventListener("keydown", control);
+        resultDisplay.innerHTML = "Win!";
+      }
+    });
+  }
+
+  function checkForGameOver(arr) {
+    let emptyCells = 0;
+    arr.forEach((item) => {
+      if (item.innerHTML === "") {
+        emptyCells++;
+      }
+    });
+    if (emptyCells === 0) {
+      document.removeEventListener("keydown", control);
+      resultDisplay.innerHTML = "Lose!";
+    }
   }
 });
