@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const widthBoard = 5;
   let cells = [];
   let score = 0;
+  let isScoreChanged = false;
+  let isCellsMoved = false;
 
   createBoard();
 
@@ -25,26 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
   function generate() {
     let randomNumber = Math.floor(Math.random() * cells.length);
     if (cells[randomNumber].innerHTML == "") {
-      cells[randomNumber].innerHTML = 2;
+      cells[randomNumber].innerHTML = twoOrFourGenerator();
       checkForGameOver(cells);
     } else generate();
   }
 
   function moveToRight() {
+
     for (let i = 0; i < widthBoard * widthBoard; i++) {
       if (i % 5 === 0) {
+
         let totalOne = cells[i].innerHTML;
         let totalTwo = cells[i + 1].innerHTML;
         let totalThree = cells[i + 2].innerHTML;
         let totalFour = cells[i + 3].innerHTML;
         let totalFive = cells[i + 4].innerHTML;
         let row = [
-          parseInt(totalOne),
-          parseInt(totalTwo),
-          parseInt(totalThree),
-          parseInt(totalFour),
           parseInt(totalFive),
+          parseInt(totalFour),
+          parseInt(totalThree),
+          parseInt(totalTwo),
+          parseInt(totalOne),
         ];
+
 
         let filteredRow = row.filter((num) => num);
 
@@ -59,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cells[i + 3].innerHTML = newRow[3];
         cells[i + 4].innerHTML = newRow[4];
       }
+
     }
   }
 
@@ -102,11 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
       let totalFour = cells[i + widthBoard * 3].innerHTML;
       let totalFive = cells[i + widthBoard * 4].innerHTML;
       let column = [
-        parseInt(totalOne),
-        parseInt(totalTwo),
-        parseInt(totalThree),
-        parseInt(totalFour),
         parseInt(totalFive),
+        parseInt(totalFour),
+        parseInt(totalThree),
+        parseInt(totalTwo),
+        parseInt(totalOne),
       ];
       let filteredColumn = column.filter((num) => num);
       let missing = 5 - filteredColumn.length;
@@ -156,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!Number.isNaN(combinedTotal)) {
           score += combinedTotal;
           scoreDisplay.innerHTML = score;
+          generate();
         }
       }
     }
@@ -178,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!Number.isNaN(combinedTotal)) {
           score += combinedTotal;
           scoreDisplay.innerHTML = score;
+          generate();
         }
       }
     }
@@ -295,4 +303,32 @@ document.addEventListener("DOMContentLoaded", () => {
       resultDisplay.innerHTML = "Lose!";
     }
   }
+
+  function checkForCellsMove() {
+
+  }
+
+  function twoOrFourGenerator() {
+    let randomNumber = Math.floor(Math.random() * 10) + 1;
+    switch (randomNumber) {
+      case 10: return 4;
+      default: return 2;
+    }
+  }
+
+  function isEqual(a, b) {
+    // если длина не равна
+
+    if (a.length != b.length) return "False";
+    else {
+      // сопоставляем каждый элемент массива
+
+      for (var i = 0; i < a.length; i++) {
+        if (a[i] != b[i]) return "False";
+      }
+
+      return "True";
+    }
+  }
+
 });
