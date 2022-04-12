@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let randomNumber = Math.floor(Math.random() * cells.length);
     if (cells[randomNumber].innerHTML == "") {
       cells[randomNumber].innerHTML = twoOrFourGenerator();
-      checkForGameOver(cells);
+      // checkForGameOver(cells);
     } else generate();
   }
 
@@ -140,6 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
         parseInt(totalFour),
         parseInt(totalFive),
       ];
+
+      console.log(cells[1]);
+
       let filteredColumn = column.filter((num) => num);
       let missing = 5 - filteredColumn.length;
       let zeros = Array(missing).fill(null);
@@ -149,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cells[i + widthBoard * 2].innerHTML = newColumn[2];
       cells[i + widthBoard * 3].innerHTML = newColumn[3];
       cells[i + widthBoard * 4].innerHTML = newColumn[4];
+      console.log(cells.value);
     }
   }
 
@@ -171,11 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function combineColumn() {
     for (let i = 0; i < widthBoard * widthBoard - widthBoard; i++) {
-      if (
-        //если раскомментировать не складывает вертикально
-        // i % 5 !== 4 &&
-        cells[i].innerHTML === cells[i + widthBoard].innerHTML
-      ) {
+      if (cells[i].innerHTML === cells[i + widthBoard].innerHTML) {
         let combinedTotal =
           parseInt(cells[i].innerHTML) +
           parseInt(cells[i + widthBoard].innerHTML);
