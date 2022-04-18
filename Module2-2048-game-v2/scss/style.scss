@@ -14,18 +14,129 @@
 .score {}
 
 .game-field {
-  background-color: green;
+  background-color: black;
   height: 300px;
   width: 300px;
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
+
   &__cell {
     position: absolute;
     width: 50px;
     height: 50px;
     font-size: 48px;
-    background-color: #fff;
+    background-color: #071204;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
     transition: all 0.15s;
   }
+}
+
+.dynamic-style-2 {
+  text-shadow:
+    0 0 1px #009999,
+    0 0 2px #009999,
+    0 0 5px #009999,
+    0 0 11px #009999,
+    0 0 20px #009999;
+}
+
+.dynamic-style-4 {
+  text-shadow:
+    0 0 1px #00cc00,
+    0 0 2px #00cc00,
+    0 0 5px #00cc00,
+    0 0 11px #00cc00,
+    0 0 20px #00cc00;
+}
+
+.dynamic-style-8 {
+
+  text-shadow:
+    0 0 1px #9fee00,
+    0 0 2px #9fee00,
+    0 0 5px #9fee00,
+    0 0 11px #9fee00,
+    0 0 20px #9fee00;
+}
+
+.dynamic-style-16 {
+  text-shadow:
+    0 0 1px #ffff00,
+    0 0 2px #ffff00,
+    0 0 5px #ffff00,
+    0 0 11px #ffff00,
+    0 0 20px #ffff00;
+}
+
+.dynamic-style-32 {
+  text-shadow:
+    0 0 1px #ffd300,
+    0 0 2px #ffd300,
+    0 0 5px #ffd300,
+    0 0 11px #ffd300,
+    0 0 20px #ffd300;
+}
+
+.dynamic-style-64 {
+  text-shadow:
+    0 0 1px #ffaa00,
+    0 0 2px #ffaa00,
+    0 0 5px #ffaa00,
+    0 0 11px #ffaa00,
+    0 0 20px #ffaa00;
+}
+
+.dynamic-style-128 {
+  font-size: 35px;
+  text-shadow:
+    0 0 1px #ff7400,
+    0 0 2px #ff7400,
+    0 0 5px #ff7400,
+    0 0 11px #ff7400,
+    0 0 20px #ff7400;
+}
+
+.dynamic-style-256 {
+  font-size: 35px;
+  text-shadow:
+    0 0 1px #ff0000,
+    0 0 2px #ff0000,
+    0 0 5px #ff0000,
+    0 0 11px #ff0000,
+    0 0 20px #ff0000;
+}
+
+.dynamic-style-512 {
+  font-size: 35px;
+  text-shadow:
+    0 0 1px #cd0074,
+    0 0 2px #cd0074,
+    0 0 5px #cd0074,
+    0 0 11px #cd0074,
+    0 0 20px #cd0074;
+}
+
+.dynamic-style-1024 {
+  font-size: 25px;
+  text-shadow:
+    0 0 1px #7209ab,
+    0 0 2px #7209ab,
+    0 0 5px #7209ab,
+    0 0 11px #7209ab,
+    0 0 20px #7209ab;
+}
+
+.dynamic-style-2048 {
+  font-size: 25px;
+  text-shadow:
+    0 0 1px #3914b0,
+    0 0 2px #3914b0,
+    0 0 5px #3914b0,
+    0 0 11px #3914b0,
+    0 0 20px #3914b0;
 }
