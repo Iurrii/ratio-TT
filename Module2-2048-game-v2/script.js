@@ -1,17 +1,30 @@
-const gridModel = [];
-let numRows = 5;
-let numCols = 5;
-let gap = 5;
+let gridModel = [];
+const numRows = 5;
+const numCols = 5;
+const gap = 5;
 let score = null;
-let gameField = document.querySelector(".JS-game-field");
-let displayCounter = document.getElementById("score");
+let isGameOver = false;
+
+const gameField = document.querySelector(".JS-game-field");
+const displayCounter = document.getElementById("score");
+const displayText = document.getElementById("result-game");
+
+//shirina-yacheyki-zavisit-ot-oblasti-prosmotra
+let cellWidth = () => {
+  if (window.innerWidth >= 1200) return 110;
+  if (window.innerWidth >= 768) return 70;
+  if (window.innerWidth >= 320) return 50;
+}
+
 
 window.onload = () => {
   initializeGridModel(numRows, numCols, gridModel);
-  createGameGrid(gameField, numRows, numCols, gap); //drawgridmodel
+  createGameGrid(gameField, numRows, numCols, gap);
+  document.addEventListener("keydown", control);
 };
 
-window.onkeydown = (e) => {
+
+function control(e) {
   if (e.code == "ArrowUp") {
     collapseUp(numCols, numRows, gridModel) &&
       addCell(numRows, numCols, gridModel);
@@ -36,19 +49,34 @@ function createGameGrid(parent, rows, cols, x) {
     for (let j = 0; j < cols; j++) {
       let cell = document.createElement("div");
       cell.classList.add("game-field__cell");
-      cell.style.top = `${i * 60 + x}px`;
-      cell.style.left = `${j * 60 + x}px`;
+      cell.style.width = `${cellWidth()}px`;
+      cell.style.height = `${cellWidth()}px`;
+      cell.style.top = `${i * (cellWidth() + x * 2) + x}px`;
+      cell.style.left = `${j * (cellWidth() + x * 2) + x}px`;
       cell.setAttribute("id", i + " " + j);
-      //управление содержимым создаваемой ячейки
+      //add-content-for-cell
       let cellValue = gridModel[i][j];
       cell.innerHTML = cellValue;
-
-      //управление стилями создаваемой ячейки
+      //add-styles-for-cell
       addDynamicStyles(cellValue, cell);
+
+      // if (cellValue == "8") {
+      //   gridModel = [];
+      //   initializeGridModel(numRows, numCols, gridModel);
+      //   createGameGrid(gameField, numRows, numCols, gap);
+      //   break;
+      // }
+
+      //check-of-cell-for-2048
+      if (cellValue == "8") {
+        isGameOver = true;
+      }
 
       parent.appendChild(cell);
     }
   }
+  //if-true-get-function
+  isGameOver && gameOver();
 }
 
 function initializeGridModel(rows, cols, grid) {
@@ -71,7 +99,8 @@ function addCell(rows, cols, grid) {
     randRow = Math.floor(Math.random() * rows);
     randCol = Math.floor(Math.random() * cols);
   }
-  grid[randRow][randCol] = Math.random() > 0.1 ? 2 : 4;
+  grid[randRow][randCol] = generateTwoOrFour();
+  checkGameOver(numRows, numCols, gridModel);
 }
 
 function collapseUp(cols, rows, grid) {
@@ -85,7 +114,7 @@ function collapseUp(cols, rows, grid) {
         let cellIterator = row;
         let nextValue = "";
 
-        let currTop = row * 60 + gap;
+        let currTop = row * (cellWidth()+(gap*2)) + gap;
         let finalTop = null;
         while (cellIterator > 0 && nextValue == "") {
           cellIterator--;
@@ -94,7 +123,7 @@ function collapseUp(cols, rows, grid) {
         if (nextValue == currentValue && nextValue != "") {
           grid[row][col] = "";
           grid[cellIterator][col] = currentValue * 2;
-          finalTop = cellIterator * 60 + gap;
+          finalTop = cellIterator * cellWidth() + gap;
           //счётчик очков
           score += currentValue * 2;
           showCounter(displayCounter, score)
@@ -102,14 +131,14 @@ function collapseUp(cols, rows, grid) {
         } else if (nextValue == "") {
           grid[row][col] = "";
           grid[0][col] = currentValue;
-          finalTop = cellIterator * 60 + gap;
+          finalTop = cellIterator * (cellWidth()+(gap*2)) + gap;
         } else {
           grid[row][col] = "";
           grid[cellIterator + 1][col] = currentValue;
-          finalTop = (cellIterator + 1) * 60 + gap;
+          finalTop = (cellIterator + 1) * (cellWidth()+(gap*2)) + gap;
         }
 
-        let leftPoint = col * 60 + gap;
+        let leftPoint = col * (cellWidth()+(gap*2)) + gap;
         divToMove = document.getElementById(row + " " + col);
         animateDivFromPointToPoint(
           divToMove,
@@ -134,7 +163,7 @@ function collapseDown(cols, rows, grid) {
       let currentValue = grid[row][col];
 
       if (currentValue != "") {
-        let currTop = row * 60 + gap;
+        let currTop = row * (cellWidth()+(gap*2)) + gap;
         let finalTop = null;
 
         let cellIterator = row;
@@ -147,7 +176,7 @@ function collapseDown(cols, rows, grid) {
         if (nextValue == currentValue && nextValue != "") {
           grid[row][col] = "";
           grid[cellIterator][col] = currentValue * 2;
-          finalTop = cellIterator * 60 + gap;
+          finalTop = cellIterator * (cellWidth()+(gap*2)) + gap;
 
           //счётчик очков
           score += currentValue * 2;
@@ -157,14 +186,14 @@ function collapseDown(cols, rows, grid) {
         } else if (nextValue == "") {
           grid[row][col] = "";
           grid[rows - 1][col] = currentValue;
-          finalTop = (rows - 1) * 60 + gap;
+          finalTop = (rows - 1) * (cellWidth()+(gap*2)) + gap;
         } else {
           grid[row][col] = "";
           grid[cellIterator - 1][col] = currentValue;
-          finalTop = (cellIterator - 1) * 60 + gap;
+          finalTop = (cellIterator - 1) * (cellWidth()+(gap*2)) + gap;
         }
 
-        let leftPoint = col * 60 + gap;
+        let leftPoint = col * (cellWidth()+(gap*2)) + gap;
         divToMove = document.getElementById(row + " " + col);
         animateDivFromPointToPoint(
           divToMove,
@@ -189,7 +218,7 @@ function collapseRight(rows, cols, grid) {
       let currentValue = grid[row][col];
 
       if (currentValue != "") {
-        let currLeft = col * 60 + gap;
+        let currLeft = col * (cellWidth()+(gap*2)) + gap;
         let finalLeft = null;
 
         let cellIterator = col;
@@ -202,7 +231,7 @@ function collapseRight(rows, cols, grid) {
         if (nextValue == currentValue && nextValue != "") {
           grid[row][col] = "";
           grid[row][cellIterator] = currentValue * 2;
-          finalLeft = cellIterator * 60 + gap;
+          finalLeft = cellIterator * (cellWidth()+(gap*2)) + gap;
           //счётчик очков
           score += currentValue * 2;
           showCounter(displayCounter, score);
@@ -210,14 +239,14 @@ function collapseRight(rows, cols, grid) {
         } else if (nextValue == "") {
           grid[row][col] = "";
           grid[row][cols - 1] = currentValue;
-          finalLeft = (cols - 1) * 60 + gap;
+          finalLeft = (cols - 1) * (cellWidth()+(gap*2)) + gap;
         } else {
           grid[row][col] = "";
           grid[row][cellIterator - 1] = currentValue;
-          finalLeft = (cellIterator - 1) * 60 + gap;
+          finalLeft = (cellIterator - 1) * (cellWidth()+(gap*2)) + gap;
         }
 
-        let topPoint = row * 60 + gap;
+        let topPoint = row * (cellWidth()+(gap*2)) + gap;
         divToMove = document.getElementById(row + " " + col);
         animateDivFromPointToPoint(
           divToMove,
@@ -242,7 +271,7 @@ function collapseLeft(rows, cols, grid) {
       let currentValue = grid[row][col];
 
       if (currentValue != "") {
-        let currLeft = col * 60 + gap;
+        let currLeft = col * (cellWidth()+(gap*2)) + gap;
         let finalLeft = null;
 
         let cellIterator = col;
@@ -255,7 +284,7 @@ function collapseLeft(rows, cols, grid) {
         if (nextValue == currentValue && nextValue != "") {
           grid[row][col] = "";
           grid[row][cellIterator] = currentValue * 2;
-          finalLeft = cellIterator * 60 + gap;
+          finalLeft = cellIterator * (cellWidth()+(gap*2)) + gap;
           //счётчик очков
           score += currentValue * 2;
           showCounter(displayCounter, score);
@@ -263,14 +292,14 @@ function collapseLeft(rows, cols, grid) {
         } else if (nextValue == "") {
           grid[row][col] = "";
           grid[row][0] = currentValue;
-          finalLeft = 0 * 60 + gap;
+          finalLeft = 0 * (cellWidth()+(gap*2)) + gap;
         } else {
           grid[row][col] = "";
           grid[row][cellIterator + 1] = currentValue;
-          finalLeft = (cellIterator + 1) * 60 + gap;
+          finalLeft = (cellIterator + 1) * (cellWidth()+(gap*2)) + gap;
         }
 
-        let topPoint = row * 60 + gap;
+        let topPoint = row * (cellWidth()+(gap*2)) + gap;
         divToMove = document.getElementById(row + " " + col);
         animateDivFromPointToPoint(
           divToMove,
@@ -311,34 +340,49 @@ function drawEmptyCell(leftPoint, topPoint, parent) {
 }
 
 function addDynamicStyles(value, item) {
-  item.classList.remove(
-    "dynamic-style-2",
-    "dynamic-style-4",
-    "dynamic-style-8",
-    "dynamic-style-16",
-    "dynamic-style-32",
-    "dynamic-style-64",
-    "dynamic-style-128",
-    "dynamic-style-256",
-    "dynamic-style-512",
-    "dynamic-style-1024",
-    "dynamic-style-2054"
-  );
-  value == "2" && item.classList.add("dynamic-style-2");
-  value == "4" && item.classList.add("dynamic-style-4");
-  value == "8" && item.classList.add("dynamic-style-8");
-  value == "16" && item.classList.add("dynamic-style-16");
-  value == "32" && item.classList.add("dynamic-style-32");
-  value == "64" && item.classList.add("dynamic-style-64");
-  value == "128" && item.classList.add("dynamic-style-128");
-  value == "256" && item.classList.add("dynamic-style-256");
-  value == "512" && item.classList.add("dynamic-style-512");
-  value == "1024" && item.classList.add("dynamic-style-1024");
-  value == "2048" && item.classList.add("dynamic-style-2048");
+  if (Number.isInteger(value)) {
+    //obnulyaem-dinamicheskie-stili
+    item.classList.remove(!`dynamic-style-${value}`);
+    //dobavlyaem-novyy-dinamicheskiy-stil
+    item.classList.add(`dynamic-style-${value}`);
+  }
+}
+
+function generateTwoOrFour() {
+  return Math.random() > 0.1 ? 2 : 4;
 }
 
 function showCounter(output, value) {
   output.innerHTML = value;
 }
 
-//part 5
+
+function checkGameOver(rows, cols, grid) {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (grid[i][j] == "" || canCollapseWithNeighbor(i, j, gridModel, numRows, numCols)) {
+        return false;
+      }
+      
+    }
+  }
+  //конец игры
+  alert('Конец игры');
+  isGameOver = true;
+  return true;
+}
+
+function canCollapseWithNeighbor(row, col, grid, rows, cols) {
+  if (row > 0 && grid[row][col] == grid[row - 1][col]) return true;
+  if (row < rows - 1 && grid[row][col] == grid[row + 1][col]) return true;
+  if (col > 0 && grid[row][col] == grid[row][col - 1]) return true;
+  if (col < cols - 1 && grid[row][col] == grid[row][col + 1]) return true;
+  return false;
+}
+
+function gameOver() {
+  document.removeEventListener("keydown", control);
+  displayText.innerHTML = "You is winner!"
+}
+
+

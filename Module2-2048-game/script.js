@@ -316,19 +316,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function isEqual(a, b) {
-    // если длина не равна
-
-    if (a.length != b.length) return "False";
-    else {
-      // сопоставляем каждый элемент массива
-
-      for (var i = 0; i < a.length; i++) {
-        if (a[i] != b[i]) return "False";
-      }
-
-      return "True";
-    }
-  }
-
 });
