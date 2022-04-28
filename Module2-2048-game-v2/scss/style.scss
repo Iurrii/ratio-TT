@@ -5,11 +5,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Iceland', cursive;
+  user-select: none;
 }
 
 body {
   background-color: #000;
-  padding-top: 10vh;
+  padding-top: 5vh;
 }
 
 .container {
@@ -21,10 +22,15 @@ body {
 }
 
 .score {
-  width: 50%;
+  width: auto;
   max-width: 300px;
   margin-bottom: 40px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  letter-spacing: 3px;
   color: #fff;
   text-shadow:
     0 0 1px #009999,
@@ -35,14 +41,11 @@ body {
 
   &__title {
     text-transform: uppercase;
-    font-size: 60px;
-    letter-spacing: 3px;
   }
 }
 
 .game-field {
-  // background-color: #000;
-  background-color: #fff;
+  background-color: #000;
   height: 300px;
   width: 300px;
   position: relative;
@@ -60,6 +63,26 @@ body {
     color: #fff;
     transition: all 0.15s;
     //не работает адекватно letter-spacing
+  }
+}
+
+.results {
+  &__table {
+    width: auto;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    text-shadow:
+      0 0 1px #009999,
+      0 0 2px #009999,
+      0 0 5px #009999,
+      0 0 11px #009999,
+      0 0 20px #009999;
+
   }
 }
 
@@ -177,6 +200,42 @@ body {
   .game-field {
     width: 400px;
     height: 400px;
+
+    &__cell {
+      font-size: 75px;
+    }
+  }
+
+  .dynamic-style-16 {
+    font-size: 65px;
+  }
+
+  .dynamic-style-32 {
+    font-size: 65px;
+  }
+
+  .dynamic-style-64 {
+    font-size: 65px;
+  }
+
+  .dynamic-style-128 {
+    font-size: 45px;
+  }
+
+  .dynamic-style-256 {
+    font-size: 45px;
+  }
+
+  .dynamic-style-512 {
+    font-size: 45px;
+  }
+
+  .dynamic-style-1024 {
+    font-size: 40px;
+  }
+
+  .dynamic-style-2048 {
+    font-size: 40px;
   }
 }
 

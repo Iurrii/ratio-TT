@@ -5,11 +5,15 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Iceland', cursive;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 body {
   background-color: #000;
-  padding-top: 10vh;
+  padding-top: 5vh;
 }
 
 .container {
@@ -21,22 +25,34 @@ body {
 }
 
 .score {
-  width: 50%;
+  width: auto;
   max-width: 300px;
   margin-bottom: 40px;
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 40px;
+  letter-spacing: 3px;
   color: #fff;
   text-shadow: 0 0 1px #009999, 0 0 2px #009999, 0 0 5px #009999, 0 0 11px #009999, 0 0 20px #009999;
 }
 
 .score__title {
   text-transform: uppercase;
-  font-size: 60px;
-  letter-spacing: 3px;
 }
 
 .game-field {
-  background-color: #fff;
+  background-color: #000;
   height: 300px;
   width: 300px;
   position: relative;
@@ -60,6 +76,27 @@ body {
   color: #fff;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
+}
+
+.results__table {
+  width: auto;
+  max-width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 0 0 1px #009999, 0 0 2px #009999, 0 0 5px #009999, 0 0 11px #009999, 0 0 20px #009999;
 }
 
 .dynamic-style-2 {
@@ -118,6 +155,33 @@ body {
   .game-field {
     width: 400px;
     height: 400px;
+  }
+  .game-field__cell {
+    font-size: 75px;
+  }
+  .dynamic-style-16 {
+    font-size: 65px;
+  }
+  .dynamic-style-32 {
+    font-size: 65px;
+  }
+  .dynamic-style-64 {
+    font-size: 65px;
+  }
+  .dynamic-style-128 {
+    font-size: 45px;
+  }
+  .dynamic-style-256 {
+    font-size: 45px;
+  }
+  .dynamic-style-512 {
+    font-size: 45px;
+  }
+  .dynamic-style-1024 {
+    font-size: 40px;
+  }
+  .dynamic-style-2048 {
+    font-size: 40px;
   }
 }
 
