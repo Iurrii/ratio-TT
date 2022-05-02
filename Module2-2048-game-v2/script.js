@@ -1,22 +1,22 @@
 //game-field
 let gridModel = [];
-const numRows = 5;
-const numCols = 5;
-const gap = 5;
+const numRows = 5,
+  numCols = 5,
+  gap = 5;
+
 //game-mechanics
-let score = null;
-let isGameOver = false;
-let gameResults = [];
-let numberOfGame = 0;
-let isVictory = false;
-let swipeDirection = null;
+let score = null,
+  isGameOver = false,
+  gameResults = [],
+  numberOfGame = 0,
+  isVictory = false;
 //timer
 let isTimerActive = false;
 
 //DOM-variables
 const gameField = document.querySelector(".JS-game-field");
 const displayCounter = document.getElementById("score-game");
-// const displayText = document.getElementById('result-game');
+const elem = document.querySelector(".JS-game-field");
 const displayTimer = document.getElementById("timer-game");
 const displayTableOfResults = document.getElementById("table-of-results");
 
@@ -30,30 +30,35 @@ let cellWidth = () => {
 window.onload = () => {
   initializeGridModel(numRows, numCols, gridModel);
   createGameGrid(gameField, numRows, numCols, gap);
-  document.addEventListener("pointerdown", (e) => checkForSwipe(e));
-  document.addEventListener("keydown", control);
+  document.addEventListener("keydown", controlKeydown);
 };
 
-function control(e) {
-  //4 ветви
+swipeDetect(elem, (swipeDir) => {
+  controlSwipeMouse(swipeDir);
+});
+
+function controlKeydown(e) {
   if (e.code == "ArrowUp") {
-    collapseUp(numCols, numRows, gridModel) &&
-      addCell(numRows, numCols, gridModel);
+    eventUp();
   } else if (e.code == "ArrowRight") {
-    collapseRight(numRows, numCols, gridModel) &&
-      addCell(numRows, numCols, gridModel);
+    eventRight();
   } else if (e.code == "ArrowDown") {
-    collapseDown(numCols, numRows, gridModel) &&
-      addCell(numRows, numCols, gridModel);
+    eventDown();
   } else if (e.code == "ArrowLeft") {
-    collapseLeft(numCols, numRows, gridModel) &&
-      addCell(numRows, numCols, gridModel);
+    eventLeft();
   }
-  //обязательный блок
-  setTimeout(() => {
-    createGameGrid(gameField, numRows, numCols, gap);
-  }, 150);
-  !isTimerActive && StartStop();
+}
+
+function controlSwipeMouse(direction) {
+  if (direction == "up") {
+    eventUp();
+  } else if (direction == "right") {
+    eventRight();
+  } else if (direction == "down") {
+    eventDown();
+  } else if (direction == "left") {
+    eventLeft();
+  }
 }
 
 function createGameGrid(parent, rows, cols, x) {
@@ -322,6 +327,42 @@ function collapseLeft(rows, cols, grid) {
   return cellsHaveMoved;
 }
 
+function eventUp() {
+  !isTimerActive && StartStop();
+  collapseUp(numCols, numRows, gridModel);
+  addCell(numRows, numCols, gridModel);
+  setTimeout(() => {
+    createGameGrid(gameField, numRows, numCols, gap);
+  }, 150);
+}
+
+function eventDown() {
+  !isTimerActive && StartStop();
+  collapseDown(numCols, numRows, gridModel);
+  addCell(numRows, numCols, gridModel);
+  setTimeout(() => {
+    createGameGrid(gameField, numRows, numCols, gap);
+  }, 150);
+}
+
+function eventLeft() {
+  !isTimerActive && StartStop();
+  collapseLeft(numCols, numRows, gridModel);
+  addCell(numRows, numCols, gridModel);
+  setTimeout(() => {
+    createGameGrid(gameField, numRows, numCols, gap);
+  }, 150);
+}
+
+function eventRight() {
+  !isTimerActive && StartStop();
+  collapseRight(numRows, numCols, gridModel);
+  addCell(numRows, numCols, gridModel);
+  setTimeout(() => {
+    createGameGrid(gameField, numRows, numCols, gap);
+  }, 150);
+}
+
 function animateDivFromPointToPoint(
   div,
   leftPoint,
@@ -542,37 +583,63 @@ function StartStop() {
 }
 //////////////////////---TIMER-END---//////////////////////////////////
 
-function checkForSwipe(e) {
+function swipeDetect(elem, callback) {
+  let touchsurface = elem,
+    swipeDir,
+    startX,
+    startY,
+    distX,
+    distY,
+    threshold = 30, //required min distance traveled to be considered swipe
+    restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+    allowedTime = 1000, // maximum time allowed to travel that distance
+    elapsedTime,
+    startTime,
+    handleswipe = callback || function (swipeDir) {};
 
-  let startX = e.clientX;
-  let startY = e.clientY;
-  document.addEventListener("pointermove", (e) => {
-    xDistance = e.clientX - startX;
-    yDistance = e.clientY - startY;
-    // console.log(e.clientY);
-    // console.log(e.clientX);
-    if (xDistance >= 40) {
-      startX = 0;
-      startY = 0;
-      swipeDirection = "right";
-      alert(swipeDirection);
-  
-    } else if (xDistance <= -40) {
-      startX = 0;
-      startY = 0;
-      swipeDirection = "left";
-      alert(swipeDirection);
-    } else if (yDistance >= 40) {
-      startX = 0;
-      startY = 0;
-      swipeDirection = "down";
-      alert(swipeDirection);
-    } else if (yDistance <= -40) {
-      startX = 0;
-      startY = 0;
-      swipeDirection = "up";
-      alert(swipeDirection);
-    }
-  });
-  // swipeDirection && console.log(swipeDirection);
+  touchsurface.addEventListener(
+    "pointerdown",
+    (e) => {
+      swipeDir = "none";
+      dist = 0;
+      startX = e.pageX;
+      startY = e.pageY;
+      startTime = new Date().getTime(); // record time when finger first makes contact with surface
+      e.preventDefault();
+    },
+    false
+  );
+
+  touchsurface.addEventListener(
+    "pointermove",
+    (e) => {
+      e.preventDefault(); // prevent scrolling when inside DIV
+    },
+    false
+  );
+
+  touchsurface.addEventListener(
+    "pointerup",
+    (e) => {
+      distX = e.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
+      distY = e.pageY - startY; // get vertical dist traveled by finger while in contact with surface
+      elapsedTime = new Date().getTime() - startTime; // get time elapsed
+      if (elapsedTime <= allowedTime) {
+        // first condition for awipe met
+        if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+          // 2nd condition for horizontal swipe met
+          swipeDir = distX < 0 ? "left" : "right"; // if dist traveled is negative, it indicates left swipe
+        } else if (
+          Math.abs(distY) >= threshold &&
+          Math.abs(distX) <= restraint
+        ) {
+          // 2nd condition for vertical swipe met
+          swipeDir = distY < 0 ? "up" : "down"; // if dist traveled is negative, it indicates up swipe
+        }
+      }
+      handleswipe(swipeDir);
+      e.preventDefault();
+    },
+    false
+  );
 }
